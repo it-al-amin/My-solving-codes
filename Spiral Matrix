@@ -1,1 +1,72 @@
 /*Given an m x n matrix, return all elements of the matrix in spiral order.*/
+
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int>v;
+        int n=matrix.size(),m=matrix[0].size(),i,j,k,l,r,p,q;
+        p=n*m;
+        i=0;
+        j=0;
+        k=m-1;
+        l=n-1;
+        while(p>0)
+        {
+            q=j;
+
+           while(q<=k)
+           {
+               //cout<<matrix[i][q]<<" ";
+               p--;
+               v.push_back(matrix[i][q++]);//ok visisting all col
+           }
+          
+           if(p==0)
+           {
+               break;
+           }
+           i++;
+           q=i;
+           while(q<=l)
+           {
+               //cout<<matrix[q][k]<<" ";
+               p--;
+               v.push_back(matrix[q++][k]);//ok last col every raw
+           }
+          
+          if(p==0)
+           {
+               break;
+           }
+           k--;
+           q=k;
+           while(q>=j)
+           {
+                //cout<<matrix[l][q]<<" ";
+                p--;
+               v.push_back(matrix[l][q--]);//last to 1st col last raw
+           }
+         if(p==0)
+           {
+               break;
+           }
+           l--;
+           q=l;
+           while(q>=i)
+           {
+               //cout<<matrix[q][j]<<" ";
+               p--;
+               v.push_back(matrix[q--][j]);//1st col last raw to 1st raw
+           }
+           j++;
+           if(p==0)
+           {
+               break;
+           }
+
+          
+        }
+        return v;
+    }
+};
