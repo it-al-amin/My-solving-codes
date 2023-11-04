@@ -1,2 +1,49 @@
 /*You are given N elements and your task is to Implement a Stack in which 
 you can get a minimum element in O(1) time*/
+
+
+class Solution{
+    
+    stack<int> s;
+    stack<int>minStack;
+    public:
+    
+       /*returns min element from stack*/
+       int getMin(){
+           if(minStack.empty())
+           {
+               return -1;
+           }
+           return minStack.top();
+           //Write your code here
+       }
+       /*returns poped element from stack*/
+       int pop(){
+            if(!s.empty()){
+                
+             int popElement=s.top();
+             s.pop();
+             if(popElement==minStack.top())
+             {
+                 minStack.pop();
+             }
+             
+             return popElement;
+             
+             
+            }
+            
+            return -1;
+          
+       }
+       
+       /*push element x into the stack*/
+       void push(int x){
+           s.push(x);
+           if(minStack.empty()||x<=minStack.top())//take it if it min||minstack is empty();
+           {
+               minStack.push(x);
+           }
+          
+       }
+};
