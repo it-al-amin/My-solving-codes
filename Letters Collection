@@ -1,5 +1,58 @@
-/*
+class Solution{
 
-
-
-*/
+        vector<pair<int,int>>p= {{-1,0},{0,-1},{-1,-1},{1,1},{-1,1},{1,-1},{1,0},{0,1}
+        ,{-2,0},{0,-2},{-2,-2},{2,-2},{-2,2},{2,0},{0,2},{2,2},
+        {-2,-1},{-2,1},{-1,-2},{1,-2},{2,-1},{2,1},{-1,2},{1,2}};
+public:
+    vector<int> matrixSum(int n, int m, vector<vector<int>> mat, int q, vector<int>qr[])
+    {
+        // code here
+        vector<vector<int>>onehop(n,vector<int>(m,0));
+        vector<vector<int>>twohop(n,vector<int>(m,0));
+        vector<int>ans(q,0);
+        int temp,temp1=0;
+        for(int i=0;i<n;i++)
+        {
+           
+            for(int j=0;j<m;j++)
+            {
+                //temp+=mat[i][j];
+                 temp=0;
+                 temp1=0;
+                for(int k=0;k<24;k++)
+                {
+                    int x=i+p[k].first;
+                    int y=j+p[k].second;
+                    if(x>=0&&x<n&&y>=0&&y<m)
+                    {
+                       if(k<8){
+                        temp+=mat[x][y];
+                       }
+                       else
+                       {
+                           temp1+=mat[x][y];
+                       }
+                        
+                    }
+                    
+                }
+              
+                onehop[i][j]=temp;
+                twohop[i][j]=temp1;
+            }
+        }
+       for(int i=0;i<q;i++)
+        {
+            if(qr[i][0]==1)
+            {
+                ans[i]=onehop[qr[i][1]][qr[i][2]];
+            }
+            else
+            {
+                 ans[i]=twohop[qr[i][1]][qr[i][2]];
+            }
+        }
+        return ans;
+        
+    }
+};
